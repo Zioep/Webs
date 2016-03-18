@@ -33,3 +33,13 @@
 		padding-top: 10px;
 		padding-bottom: 10px;	
 	}
+
+	#holderLeft {
+		float: left;
+		max-height: 800px;
+		clear: both;
+		margin-left: 10%;
+		overflow: auto;
+		min-width: 500px;
+
+	}
