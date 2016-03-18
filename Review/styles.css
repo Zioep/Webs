@@ -1,0 +1,35 @@
+#bigDiv {
+		margin: auto;
+		margin-left: 25%;
+		width: 50%;
+		padding: 10px;
+		font-size: 20px;
+		text-align: center;
+		background-color: black;
+		color: white;
+		float: left;
+		height: 20px;
+	}
+
+	#colorChanger {
+		text-align: center;
+		background-color: orange;
+		float: right;
+		margin-top: 10px;
+		margin-right: 100px;
+	}
+
+	#outerDiv {
+		background-color: black;
+		height: 1500px;
+		padding: 10px;
+
+	}
+
+	#topBit {
+		margin: auto;
+		background-color: white;
+		height: 800px;
+		padding-top: 10px;
+		padding-bottom: 10px;	
+	}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="jquery-2.2.1.min.js"></script>
+
+  <script>
+  	$(function() {
+	    $( "#accordion" ).accordion({
+	      collapsible: true
+   		});
+   	});
+  </script>
+</head>
+
+<body>
+
+	<title>This is a test to get Javascript working</title>
+	<div id="outerDiv">	
+		<div id ="topBit">
+			<div id="bigDiv">This is the page on which we shall do the testing.</div>
+			<button id="colorChanger" onclick="changeColor()">Don't click this button!</button>
+			<div id="accordion">
+				<h3>Test</h3>
+		</div>
+	</div>
+
+
+
+<script> 
+
+	function changeColor() {
+		var ele = document.getElementById("bigDiv");
+		ele.style.backgroundColor = "green";
+	}
+
+	/*
+	Implement the ajax call here to return a json from a file
+	See bottom response for details: http://stackoverflow.com/questions/17884637/load-json-file-from-header-without-ajax
+	Make a json file, then import it using ajax.  This will require you to use jquery to get this.	
+
+	Possibly use the imgur api for ajax call: http://api.imgur.com/endpoints/album
+	Reddit api: https://www.reddit.com/dev/api
+	*/
+
+
+
+</script>
+
+ 
+</body>
+</html>
