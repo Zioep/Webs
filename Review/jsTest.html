@@ -2,21 +2,11 @@
 <html lang="en">
 <head>
 
-  <script src="jquery-2.2.1.min.js"></script>
-  <script src="jquery-ui/jquery-ui.js"></script>
   <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css">
   <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
   <link rel="stylesheet" href="jquery-ui/jquery-ui.structure.css">
   <link rel="stylesheet" href="styles.css">
 
-
-  <script>
-  	$(function() {
-	    $( "#accordion" ).accordion({
-	      collapsible: true
-   		});
-   	});
-  </script>
 </head>
 
 <body>
@@ -24,40 +14,86 @@
 	<title>This is a test to get Javascript working</title>
 	<div id="outerDiv">	
 		<div id ="topBit">
-			<div id="bigDiv">This is the page on which we shall do the testing.</div>
-			<button id="colorChanger" onclick="changeColor()">Don't click this button!</button>
+			<div id="bigDiv">AccordionReddit Viewer</div>
+			<button id="colorChanger" onclick="changeColor()">Make the magic happen ;)</button>
 			<div id="holderLeft">
-				<div id="accordion">
-					<h3>Test</h3>
-					<div>Testing</div>
-				</div>
-				
-
-		</div>
+				<div class="accordion"></div>
+			</div>
 	</div>
 
+</body>
 
-
+<script src="jquery-2.2.1.min.js"></script>
+<script src="jquery-ui/jquery-ui.js"></script>
 <script> 
-
+	
+	var datas = "";
 	function changeColor() {
-		var ele = document.getElementById("bigDiv");
-		ele.style.backgroundColor = "green";
+		$("#bigDiv").css("backgroundColor", "white");
+		$("#bigDiv").css("color", "black");		
+		getDatas();
 	}
 
-	/*
-	Implement the ajax call here to return a json from a file
-	See bottom response for details: http://stackoverflow.com/questions/17884637/load-json-file-from-header-without-ajax
-	Make a json file, then import it using ajax.  This will require you to use jquery to get this.	
 
-	Possibly use the imgur api for ajax call: http://api.imgur.com/endpoints/album
-	Reddit api: https://www.reddit.com/dev/api
-	*/
+	// $('.contentViewer img').load(function(){
+	//     var height = $(this).height();
+	//     console.log(height);
+	//     $(this).parent().css('height', height);
+	    
+	// });
+
+	function resizeContainer() {
+		var height = $(this).height();
+	    console.log(height);
+	    $(this).parent().css('height', height);
+	}
+
+	function getDatas() {
+		$.ajax({
+			url: "http://www.reddit.com/r/GAMING.json",
+			success: done
+		});
+
+		function done (msg) {
+			datas = msg;
+			datas = datas.data.children;
+
+			html = generateTitleAccordions(datas);
+
+			$("#holderLeft").html(html);
+
+			$( ".accordion" ).accordion({
+		      collapsible: true,
+		      active: false, 
+		      activate:function(event, ui) {
+			    console.log(ui.newPanel);
+			    var image = ui.newPanel.children(".notSized");
+			    image.parent().css("height", image.height());
+			    image.removeClass("notSized");
+		      }
+	   		});
+		}
+
+		function generateTitleAccordions(datas) {
+			var html = "<div class=\"accordion\">";
+			var size = datas.length;
+			var url = "";
+
+			for (i = 0; i < size; i++) {
+				url = getGif(datas[i].data.url);
+				html +=  "<h3>" + datas[i].data.title + "</h3>"
+					+ "<div class=\"contentViewer\">" + "<img class=\"notSized\" src=\"" + url + "\" />" + "</div>";
+			}
+
+			return html +=  "</div>";
+		}
+
+		function getGif(url) {
+			return url.replace(".gifv", ".gif");
+		}
 
 
+	}
 
 </script>
-
- 
-</body>
 </html>

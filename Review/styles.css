@@ -1,4 +1,4 @@
-#bigDiv {
+	#bigDiv {
 		margin: auto;
 		margin-left: 25%;
 		width: 50%;
@@ -17,6 +17,7 @@
 		float: right;
 		margin-top: 10px;
 		margin-right: 100px;
+		border-radius: 5px;
 	}
 
 	#outerDiv {
@@ -28,7 +29,7 @@
 
 	#topBit {
 		margin: auto;
-		background-color: white;
+		background-color: black;
 		height: 800px;
 		padding-top: 10px;
 		padding-bottom: 10px;	
@@ -40,6 +41,17 @@
 		clear: both;
 		margin-left: 10%;
 		overflow: auto;
-		min-width: 500px;
+		max-width: 550px;
+		margin-top: 1%;
+	}
 
+	.contentViewer {
+		overflow: auto;
+		width: 500px;
+		height: 400px;
+	}
+
+	.contentViewer img {
+		width: 100%;
+		height: auto;
 	}
