@@ -28,6 +28,8 @@
 <script> 
 	
 	var datas = "";
+	var imageTypes = [".jpg", ".png", ".gif"];
+
 	function changeColor() {
 		$("#bigDiv").css("backgroundColor", "white");
 		$("#bigDiv").css("color", "black");		
@@ -60,8 +62,6 @@
 
 			html = generateTitleAccordions(datas);
 
-			$("#holderLeft").html(html);
-
 			$( ".accordion" ).accordion({
 		      collapsible: true,
 		      active: false, 
@@ -75,21 +75,57 @@
 		}
 
 		function generateTitleAccordions(datas) {
-			var html = "<div class=\"accordion\">";
+			//var html = "";
 			var size = datas.length;
 			var url = "";
 
 			for (i = 0; i < size; i++) {
-				url = getGif(datas[i].data.url);
-				html +=  "<h3>" + datas[i].data.title + "</h3>"
+				var url = "";
+				url = getImageURL(datas[i].data.url);
+
+				var html =  "<h3>" + datas[i].data.title + "</h3>"
 					+ "<div class=\"contentViewer\">" + "<img class=\"notSized\" src=\"" + url + "\" />" + "</div>";
+				$(".accordion").append(html);
 			}
 
-			return html +=  "</div>";
+			return html;
 		}
 
-		function getGif(url) {
-			return url.replace(".gifv", ".gif");
+		function getImageURL(url) {
+			if (url.indexOf(".gifv") > -1) {
+				return url.replace(".gifv", ".gif");
+			}
+
+			if (url.indexOf("imgur.com") > -1) {
+				if (url.indexOf(".png") > -1) {
+					return url;
+				} else if (url.indexOf(".jpg") > -1) {
+					return url;
+				} else {
+					return url.concat(".png");
+				}
+			}
+		
+			if (url.indexOf("gfycat.com") > -1) {
+				if (url.indexOf("giant.gfycat.com") > -1) {
+					return url;
+				} 
+				return url.slice(0, 7) + "giant." + url.slice(8, url.length) + ".gif";
+			}
+		// 	for (i = 0; i < imageTypes.length; i++) {
+		// 		if (url.indexOf(imageTypes[i]) > -1) {
+		// 			console.log("valid url: " + url);
+		// 			return url.replace(".gifv", ".gif");
+		// 		}
+		// 	}
+
+		// 	if (url.indexOf("gifv") > -1) {
+		// 		console.log("Changing to gif: " + url);
+		// 		return url.replace(".gifv", ".gif");
+		// 	} else {
+		// 		//console.log("invalid url: " + url);
+		// 		return url;
+		// 	}
 		}
 
 
